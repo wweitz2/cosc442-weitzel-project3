@@ -26,21 +26,58 @@ public class VendingMachineTest {
 	}
 
 	/**
-	 * Tests that adds item adds an item
+	 * Tests addItem method with A_CODE slot
 	 */
-	@Test(expected=VendingMachineException.class)
-	public void testAddItem() {
+	@Test
+	public void testAddItemA_CODE() {
 		vm.addItem(item, A_CODE);
 		assertEquals(item, vm.getItem(VendingMachine.A_CODE));
+	}
+	
+	/**
+	 * Tests addItem method with B_CODE slot
+	 */
+	@Test
+	public void testAddItemB_CODE() {
 		vm.addItem(item, B_CODE);
 		assertEquals(item, vm.getItem(VendingMachine.B_CODE));
+	}
+	
+	/**
+	 * Tests addItem method with C_CODE slot
+	 */
+	@Test
+	public void testAddItemC_CODE() {
 		vm.addItem(item, C_CODE);
 		assertEquals(item, vm.getItem(VendingMachine.C_CODE));
+	}
+	
+	/**
+	 * Tests addItem method with D_CODE slot
+	 */
+	@Test
+	public void testAddItemD_CODE() {
 		vm.addItem(item, D_CODE);
 		assertEquals(item, vm.getItem(VendingMachine.D_CODE));
+	}
+	
+	/**
+	 * Tests addItem method with invalid code slot
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testAddItemExceptionInvalidCode() {
 		vm.addItem(item, "f");
 	}
-
+	
+	/**
+	 * Tests addItem method with occupied slot
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testAddItemExceptionSlotOccupied() {
+		vm.addItem(item, A_CODE);
+		vm.addItem(item, A_CODE);
+	}
+	
 	/**
 	 * Tests that removeItems removes an item
 	 */
@@ -50,6 +87,14 @@ public class VendingMachineTest {
 		vm.removeItem(A_CODE);
 		assertEquals(null, vm.getItem(A_CODE));
 	}
+	
+	/**
+	 * Tests that removeItems throws exception
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testRemoveItemThrowsException() {
+		vm.removeItem(A_CODE);
+	}
 
 	/**
 	 * Test that insertMoney adds money to the balance
@@ -58,6 +103,14 @@ public class VendingMachineTest {
 	public void testInsertMoney() {
 		vm.insertMoney(2.50);
 		assertEquals(2.50, vm.getBalance(), 0.001);
+	}
+	
+	/**
+	 * Test that insertMoney throws exception
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testInsertMoneyThrowsException() {
+		vm.insertMoney(-1);
 	}
 
 	/**
