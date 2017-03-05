@@ -11,6 +11,13 @@ import static org.junit.Assert.*;
  * @version $Revision: 1.0 $
  */
 public class VendingMachineTest {
+	
+	private VendingMachine vm;
+	private VendingMachineItem item;
+	private final String A_CODE = "A";
+	private final String B_CODE = "B";
+	private final String C_CODE = "C";
+	private final String D_CODE = "D";
 	/**
 	 * Run the VendingMachine() constructor test.
 	 *
@@ -107,6 +114,33 @@ public class VendingMachineTest {
 		fixture.addItem(item, code);
 
 		// add additional test code here
+	}
+	
+	/**
+	 * Tests addItem method with B_CODE slot
+	 */
+	@Test
+	public void testAddItemB_CODE() {
+		vm.addItem(item, B_CODE);
+		assertEquals(item, vm.getItem(VendingMachine.B_CODE));
+	}
+	
+	/**
+	 * Tests addItem method with C_CODE slot
+	 */
+	@Test
+	public void testAddItemC_CODE() {
+		vm.addItem(item, C_CODE);
+		assertEquals(item, vm.getItem(VendingMachine.C_CODE));
+	}
+	
+	/**
+	 * Tests addItem method with D_CODE slot
+	 */
+	@Test
+	public void testAddItemD_CODE() {
+		vm.addItem(item, D_CODE);
+		assertEquals(item, vm.getItem(VendingMachine.D_CODE));
 	}
 
 	/**
