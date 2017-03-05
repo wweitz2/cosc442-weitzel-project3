@@ -18,6 +18,8 @@ public class VendingMachineTest {
 	private final String B_CODE = "B";
 	private final String C_CODE = "C";
 	private final String D_CODE = "D";
+	
+	
 	/**
 	 * Run the VendingMachine() constructor test.
 	 *
@@ -141,6 +143,53 @@ public class VendingMachineTest {
 	public void testAddItemD_CODE() {
 		vm.addItem(item, D_CODE);
 		assertEquals(item, vm.getItem(VendingMachine.D_CODE));
+	}
+	
+	/**
+	 * Tests addItem method with invalid code slot
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testAddItemExceptionInvalidCode() {
+		vm.addItem(item, "f");
+	}
+	
+	/**
+	 * Tests addItem method with occupied slot
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testAddItemExceptionSlotOccupied() {
+		vm.addItem(item, A_CODE);
+		vm.addItem(item, A_CODE);
+	}
+	
+	/**
+	 * Tests that removeItems throws exception
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testRemoveItemThrowsException() {
+		vm.removeItem(A_CODE);
+	}
+	
+	/**
+	 * Tests that removeItems removes an item
+	 */
+	@Test
+	public void testRemoveItem() {
+		vm.addItem(item, A_CODE);
+		vm.removeItem(A_CODE);
+		assertEquals(null, vm.getItem(A_CODE));
+	}
+	
+	/**
+	 * Tests the makePurchase method
+	 */
+	@Test
+	public void testMakePurchase() {
+		vm.addItem(item,VendingMachine.A_CODE);
+		vm.insertMoney(3.00);
+		assertEquals(true, vm.makePurchase(VendingMachine.A_CODE));
+		assertEquals(null, vm.getItem(VendingMachine.A_CODE));
+		assertEquals(0.50, vm.getBalance(), 0.001);
 	}
 
 	/**
@@ -408,9 +457,9 @@ public class VendingMachineTest {
 	 * @generatedBy CodePro at 3/4/17 7:18 PM
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
-		// add additional set up code here
+	public void setUp() throws Exception {
+		vm = new VendingMachine();
+		item = new VendingMachineItem("Dat item", 2.50);
 	}
 
 	/**

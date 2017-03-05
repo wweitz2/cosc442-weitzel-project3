@@ -1,5 +1,6 @@
 package edu.towson.cis.cosc442.project3.vendingmachine;
 
+import org.junit.Test;
 
 /**
  * 
@@ -136,6 +137,8 @@ public class VendingMachine {
 		}
 		return item;
 	}
+	
+	
 
 	/**
 	 * Function to put money into the vending machine.  
